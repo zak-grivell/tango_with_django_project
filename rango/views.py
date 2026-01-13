@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse
@@ -141,3 +142,8 @@ def user_login(request):
             return HttpResponse("Invalid login details supplied.")
 
     return render(request, "rango/login.html")
+
+
+@login_required
+def restricted(request):
+    return HttpResponse("Since you're logged in, you can see this text!")
